@@ -14,7 +14,28 @@ The class should have the following methods:
 - getFoodInfo(): string, returns a string in the following format: "<name> has <calories> calories"
 */
 /* Write your Task 1 solution here */
+ class Food{
+  name:string;
+  calories:number;
 
+  constructor (name:string,calories:number){
+    this.name=name;
+    this.calories=calories;
+  }
+ 
+
+ getName (): string{
+  return this.name;
+ }
+
+ getFoodInfo (): string{
+  return (`${this.name} has ${this.calories} calories`);
+ }
+
+}
+// let apple = new Food("Apple", 95);
+// console.log(apple.getName());
+// console.log(apple.getFoodInfo());
 
 
 /* Task 2 - Create a class Refrigerator. The purpose of the class is to store Food objects. 
@@ -22,24 +43,59 @@ The class should have the following methods:
   The Refrigerator should offer capabilities to add Food objects to the refrigerator,
   get the contents of the refrigerator and eat a Food object from the refrigerator.
   The Refrigerator should also offer method to calculate the total calories of all the Food objects in the refrigerator.
-
   The class should have the following methods:
   - addFood(food: Food): void, adds a Food object to the refrigerator
   - getContents(): string[], returns an array of strings containing the names of the Food objects in the refrigerator
-  - eatFood(foodName: string): string, finds Food object with foodName from the refrigerator, removes a Food object from the refrigerator and
-                         returns a string in the following format: "You ate <name> with <calories> calories". If 
-                         the Food object is not in the refrigerator, return a string in the following format:
-                         "There is no <name> in the refrigerator".
+  - eatFood(foodName: string): string, finds Food object with foodName from the refrigerator, removes a Food object from the refrigerator
+   and
+  returns a string in the following format: "You ate <name> with <calories> calories". If 
+ the Food object is not in the refrigerator, return a string in the following format:
+ "There is no <name> in the refrigerator".
   - getTotalCalories(): number, returns the total calories of all the Food objects in the refrigerator
   - getNumberOfFoodItems(): number, returns the number of Food objects in the refrigerator
   
-
   Note you can use an array method splice to remove an element from an array.
   You can read more about the splice method here: 
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 */
 /* Write your Task 2 solution here */
+class Refrigerator {
+   food:Food[];
 
+  constructor (){
+    this.food=[];
+  }
 
+  addFood(food: Food): void{
+    this.food.push(food)
+  }
+
+  getContents():string[]{
+    return this.food.map(food => food.name);
+  }
+
+  eatFood(foodName: string):string {
+    for (let i = 0; i <this.food.length; i++){
+      if (foodName === this.food  [i].name){
+        let eatenFood = this.food[i];
+         this.food.splice(i, 1);  
+        return (`You ate ${this.food[i].name} with ${this.food[i].calories} calories`) 
+      }
+    }
+       return (`There is no ${foodName} in the refrigerator`); 
+  }
+
+  getTotalCalories ():number{
+  let totalCalories = 0;
+  for (let i = 0; i < this.food.length; i++){
+    totalCalories += this.food[i].calories;
+  }
+  return totalCalories;
+  }
+
+  getNumberOfFoodItems ():number{
+    return this.food.length;
+  }
+}
 
 export { Food, Refrigerator };
