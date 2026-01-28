@@ -82,7 +82,7 @@ class Refrigerator {
         return (`You ate ${this.food[i].name} with ${this.food[i].calories} calories`) 
       }
     }
-       return (`There is no ${foodName} in the refrigeratooor`); 
+       return (`There is no ${foodName} in the refrigerator`); 
   }
 
   getTotalCalories ():number{
